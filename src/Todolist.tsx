@@ -1,5 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterValueType} from "./App";
+import {useAutoAnimate} from "@formkit/auto-animate/react";
+
 
 type TaskType = {
   id: string;
@@ -13,16 +15,19 @@ type PropsType = {
   removeTask: (taskId: string) => void;
   deleteAllTask: () => void;
   changeFilter: (value: FilterValueType) => void;
-  addTask: (title: string) => void
+  addTask: (title: string) => void;
+  children?:React.ReactNode;
 }
 
-export function Todolist(props: PropsType) {
+export const Todolist: React.FC<PropsType> = ({children, ...props}) => {
 
   const [newTaskTitle, setNewTaskTitle] = useState("");
 
   const onNewTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setNewTaskTitle(event.currentTarget.value)
   };
+
+  const [listRef] = useAutoAnimate<HTMLUListElement>();
 
   const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.charCode === 13) {
@@ -51,7 +56,7 @@ export function Todolist(props: PropsType) {
                onKeyPress={onKeyPressHandler}/>
         <button onClick={addTask}>+</button>
       </div>
-      <ul>
+      <ul ref={listRef}>
         {props.tasks.map((task: TaskType) => {
           const onRemoveHandler = () => props.removeTask(task.id);
           return (
@@ -71,6 +76,7 @@ export function Todolist(props: PropsType) {
         <button onClick={onDeleteAllTasksClickHandler}>Delete all</button>
         <button onClick={onFirstThreeTasksClickHandler}>Give 3 first tasks</button>
       </div>
+      {children}
     </div>
   )
 }

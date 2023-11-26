@@ -59,8 +59,11 @@ function App() {
                 removeTask={removeTask}
                 deleteAllTask={deleteAllTask}
                 changeFilter={changeFilter}
-                addTask={addTask}
-      />
+                addTask={addTask}>
+        <div>
+          <div> Many intresting information</div>
+        </div>
+      </Todolist>
     </div>
   );
 }
