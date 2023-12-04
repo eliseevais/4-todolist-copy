@@ -5,7 +5,6 @@ import React, {
 } from 'react';
 import {FilterValueType} from "./App";
 import {useAutoAnimate} from "@formkit/auto-animate/react";
-import {Button} from "./components/Button";
 
 type TaskType = {
   id: string;
@@ -49,14 +48,6 @@ export const Todolist: React.FC<PropsType> = ({children, ...props}) => {
     }
     ;
   };
-  // const onAddTaskHandler = () => {
-  //   if (newTaskTitle.trim() !== '') {
-  //     props.addTask(newTaskTitle.trim());
-  //     setNewTaskTitle('');
-  //   } else {
-  //     setError('Field is required')
-  //   };
-  // }
 
   const onAllClickHandler = () => props.changeFilter('all');
   const onActiveClickHandler = () => props.changeFilter('active');
@@ -123,13 +114,6 @@ export const Todolist: React.FC<PropsType> = ({children, ...props}) => {
                 onClick={onFirstThreeTasksClickHandler}>Give 3 first tasks
         </button>
         <button onClick={onDeleteAllTasksClickHandler}>Delete all</button>
-
-        {/*<Button name={'All'} onClick={() => onClickFilterHandler('all')}/>*/}
-        {/*<Button name={'Active'} onClick={() => onClickFilterHandler('active')}/>*/}
-        {/*<Button name={'Completed'}*/}
-        {/*        onClick={() => onClickFilterHandler('completed')}/>*/}
-        {/*<Button name={'Give 3 first tasks'}*/}
-        {/*        onClick={() => onClickFilterHandler('three')}/>*/}
 
       </div>
       {children}
