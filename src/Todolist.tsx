@@ -40,11 +40,7 @@ export const Todolist: React.FC<PropsType> = ({children, ...props}) => {
     }
   };
 
-  // const addTask = () => {
-  //   props.addTask(newTaskTitle);
-  //   setNewTaskTitle('')
-  // };
-  const onAddTaskHandler = () => {
+  const addTask = () => {
     if (newTaskTitle.trim() !== '') {
       props.addTask(newTaskTitle.trim());
       setNewTaskTitle('');
@@ -52,7 +48,15 @@ export const Todolist: React.FC<PropsType> = ({children, ...props}) => {
       setError('Field is required')
     }
     ;
-  }
+  };
+  // const onAddTaskHandler = () => {
+  //   if (newTaskTitle.trim() !== '') {
+  //     props.addTask(newTaskTitle.trim());
+  //     setNewTaskTitle('');
+  //   } else {
+  //     setError('Field is required')
+  //   };
+  // }
 
   const onAllClickHandler = () => props.changeFilter('all');
   const onActiveClickHandler = () => props.changeFilter('active');
@@ -78,14 +82,14 @@ export const Todolist: React.FC<PropsType> = ({children, ...props}) => {
                className={error ? 'error' : ''}
         />
 
-        {/*<button onClick={addTask}>+</button>*/}
-        <Button name={'+'} onClick={onAddTaskHandler}/>
+        <button onClick={addTask}>+</button>
+        {/*<Button name={'+'} onClick={onAddTaskHandler}/>*/}
         {error && <div className='error-message'>{error}</div>}
 
       </div>
       <ul ref={listRef}>
         {props.tasks.map((task: TaskType) => {
-          // const onRemoveTaskHandler = () => props.removeTask(task.id);
+          const onRemoveTaskHandler = () => props.removeTask(task.id);
           const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
             props.changeTaskStatus(task.id, event.currentTarget.checked);
           };
@@ -97,9 +101,8 @@ export const Todolist: React.FC<PropsType> = ({children, ...props}) => {
                      onChange={onChangeHandler}
               />
               <span>{task.title}</span>
-
-              {/*<button onClick={onRemoveTaskHandler}>✖️</button>*/}
-              <Button name={'✖️'} onClick={() => onRemoveTaskHandler(task.id)}/>
+              <button onClick={onRemoveTaskHandler}>✖️</button>
+              {/*<Button name={'✖️'} onClick={() => onRemoveTaskHandler(task.id)}/>*/}
 
             </li>
           )
@@ -107,20 +110,27 @@ export const Todolist: React.FC<PropsType> = ({children, ...props}) => {
 
       </ul>
       <div>
-        <button className={props.filter === 'all' ? 'active-filter' : ''} onClick={onAllClickHandler}>All</button>
-        <button className={props.filter === 'active' ? 'active-filter' : ''} onClick={onActiveClickHandler}>Active</button>
-        <button className={props.filter === 'completed' ? 'active-filter' : ''} onClick={onCompletedClickHandler}>Completed</button>
+        <button className={props.filter === 'all' ? 'active-filter' : ''}
+                onClick={onAllClickHandler}>All
+        </button>
+        <button className={props.filter === 'active' ? 'active-filter' : ''}
+                onClick={onActiveClickHandler}>Active
+        </button>
+        <button className={props.filter === 'completed' ? 'active-filter' : ''}
+                onClick={onCompletedClickHandler}>Completed
+        </button>
+        <button className={props.filter === 'three' ? 'active-filter' : ''}
+                onClick={onFirstThreeTasksClickHandler}>Give 3 first tasks
+        </button>
+        <button onClick={onDeleteAllTasksClickHandler}>Delete all</button>
 
         {/*<Button name={'All'} onClick={() => onClickFilterHandler('all')}/>*/}
         {/*<Button name={'Active'} onClick={() => onClickFilterHandler('active')}/>*/}
         {/*<Button name={'Completed'}*/}
         {/*        onClick={() => onClickFilterHandler('completed')}/>*/}
-
-        <button className={props.filter === 'three' ? 'active-filter' : ''} onClick={onFirstThreeTasksClickHandler}>Give 3 first tasks</button>
         {/*<Button name={'Give 3 first tasks'}*/}
         {/*        onClick={() => onClickFilterHandler('three')}/>*/}
 
-        <button onClick={onDeleteAllTasksClickHandler}>Delete all</button>
       </div>
       {children}
     </div>
