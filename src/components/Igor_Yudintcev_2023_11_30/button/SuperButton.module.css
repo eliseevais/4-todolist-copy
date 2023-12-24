@@ -1,0 +1,69 @@
+.button {
+  overflow: hidden;
+  padding: 5px 24px;
+  margin: 4px 0;
+
+  border-radius: 3px;
+  border: none;
+
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+
+  min-height: 20px;
+  max-height: 40px;
+  min-width: 100px;
+  max-width: 250px;
+}
+
+.red {
+  background: #cc1439;
+}
+
+.secondary {
+  color: #0066CC;
+  background: transparent;
+  border: 1px solid #0066CC;
+  border-radius: 3px;
+}
+
+.default {
+  background: #088651;
+}
+
+.disabled {
+  color: #ffffff;
+  background: #303132;
+  opacity: 0.5;
+}
+
+.default:hover {
+  background: #166447;
+}
+
+.red:hover {
+  background: #8b0e2b;
+}
+
+.secondary:hover {
+  background: #062543;
+}
+
+.default:active {
+  background: #0059b3;
+}
+
+.secondary:active {
+  background: #C9E5FF;
+}
+
+.red:active {
+  background: #b31232;
+}
+
+.button:disabled {
+  cursor: default;
+}
